@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-  var actions = ["Formula1", "NASCAR", "Top Fuel", "Monster Trucks", "Street Racing", "Assembly Line", "Foot Ball", "Baseball", "Hockey", "Sports Bloopers","Wrecks"];
+  var actions = ["Sports Bloopers", "Formula1", "NASCAR", "Top Fuel", "Monster Trucks", "Street Racing", "Assembly Line", "Football", "Baseball", "Hockey", "Wrecks"];
   function displayGifButtons(){
       $("#gifButtonsView").empty(); 
       for (var i = 0; i < actions.length; i++){
@@ -23,16 +23,9 @@ $( document ).ready(function() {
       return false;
       });
   }
-  // function removeLastButton(){
-      // $("removeGif").on("click", function(){
-      // actions.pop(action);
-      // displayGifButtons();
-      // return false;
-      // });
-  // }
   function displayGifs(){
       var action = $(this).attr("data-name");
-      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + action + "&api_key=dc6zaTOxFJmzC&limit=10";
+      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + action + "&api_key=sRxqUPUsL6DAo6fSVbhUDSWAPZOzZsTE&limit=10";
       console.log(queryURL);
       $.ajax({
           url: queryURL,
@@ -51,12 +44,11 @@ $( document ).ready(function() {
               gifDiv.addClass("gifDiv");
               var gifRating = $("<p>").text("Rating: " + results[i].rating);
               gifDiv.append(gifRating);
-              // pulling gif
               var gifImage = $("<img>");
               gifImage.attr("src", results[i].images.fixed_height_small_still.url); 
-              // gifImage.attr("data-still",results[i].images.fixed_height_small_still.url); 
-              // gifImage.attr("data-animate",results[i].images.fixed_height_small.url); 
-              // gifImage.attr("data-state", "still");
+              gifImage.attr("data-still",results[i].images.fixed_height_small_still.url); 
+              gifImage.attr("data-animate",results[i].images.fixed_height_small.url); 
+              gifImage.attr("data-state", "still");
               gifImage.addClass("image");
               gifDiv.append(gifImage);
               $("#gifsView").prepend(gifDiv);
@@ -65,17 +57,16 @@ $( document ).ready(function() {
   }
   displayGifButtons();
   addNewButton();
-  // removeLastButton();
   $(document).on("click", ".action", displayGifs);
-  // $(document).on("click", ".image", function(){
-      // var state = $(this).attr('data-state');
-      // if ( state == 'still'){
-          // $(this).attr('src', $(this).data('animate'));
-          // $(this).attr('data-state', 'animate');
-      // }else{
-          // $(this).attr('src', $(this).data('still'));
-          // $(this).attr('data-state', 'still');
-      // }
-  // });
+  $(document).on("click", ".image", function(){
+      var state = $(this).attr('data-state');
+      if ( state == 'still'){
+          $(this).attr('src', $(this).data('animate'));
+          $(this).attr('data-state', 'animate');
+      }else{
+          $(this).attr('src', $(this).data('still'));
+          $(this).attr('data-state', 'still');
+      }
+  });
   });
   
