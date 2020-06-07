@@ -1,4 +1,4 @@
-var topics = [
+var categories = [
     "NFL",
     "NASCAR Crashes",
     "Drag Racing",
@@ -10,10 +10,10 @@ renderButtons();
 
 function renderButtons() {
     $(".buttons-list").empty();
-    for (var i = 0; i < topics.length; i++) {
+    for (var i = 0; i < categories.length; i++) {
         a = $("<button type='button' class='btn btn-primary sport'>")
-        a.attr("data-sport", topics[i]);
-        a.text(topics[i]);
+        a.attr("data-sport", categories[i]);
+        a.text(categories[i]);
         $(".buttons-list").append(a);
     };
 };
@@ -68,8 +68,8 @@ $(document).on("click", "#add-sport", function () {
     event.preventDefault();
     var newSport = $("#user-input").val().trim();
     console.log(newSport);
-    topics.push(newSport);
-    console.log(topics);
+    categories.push(newSport);
+    console.log(categories);
     $("#user-input").val("");
     renderButtons();
 });
